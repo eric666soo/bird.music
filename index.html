@@ -625,10 +625,10 @@
     </style>
 </head>
 <body class="pop-art">
-    <!-- 背景图片容器 - 修改为您的图片路径 -->
+    <!-- 背景图片容器 -->
     <div class="background-container">
-        <img src="images/莫奈图片.jpg" alt="莫奈风格背景" class="background-image pop-bg">
-        <img src="images/圣诞节图片.jpg" alt="圣诞节背景" class="background-image christmas-bg" style="display: none;">
+        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1950&q=80" alt="莫奈风格背景" class="background-image pop-bg">
+        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="圣诞节背景" class="background-image christmas-bg" style="display: none;">
     </div>
     
     <!-- 音效开关 -->
@@ -754,7 +754,9 @@
     </div>
     
     <!-- 音频元素 -->
-    <audio id="audioPlayer" preload="metadata"></audio>
+    <audio id="audioPlayer" preload="metadata">
+        <source src="https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3" type="audio/mpeg">
+    </audio>
     
     <!-- 点击音效 -->
     <audio id="clickSound" preload="auto">
@@ -789,68 +791,33 @@
         const langZh = document.getElementById('langZh');
         const langEn = document.getElementById('langEn');
         
-        // 歌曲数据 - 修改为您的GitHub MP3文件路径
-        // 这里有两种方式，请选择一种：
-        
-        // 方式一：使用相对路径（如果文件在songs/文件夹中）
+        // 歌曲数据
         const songs = [
             {
-                title: { zh: '歌曲1 - 鸟类的家园', en: 'Song 1 - Birds\' Home' },
+                title: { zh: 'Alex Wang - 鸟类的家园', en: 'Alex Wang - Birds\' Home' },
                 artist: { zh: '鸟类保护音乐专辑', en: 'Bird Conservation Album' },
                 duration: '3:45',
-                src: 'songs/歌曲1.mp3'  // 相对路径
+                src: '歌曲1.mp3'
             },
             {
-                title: { zh: '歌曲2 - 自由的翅膀', en: 'Song 2 - Wings of Freedom' },
+                title: { zh: 'Alex Wang - 自由的翅膀', en: 'Alex Wang - Wings of Freedom' },
                 artist: { zh: '鸟类保护音乐专辑', en: 'Bird Conservation Album' },
                 duration: '4:12',
-                src: 'songs/歌曲2.mp3'
+                src: '歌曲2.mp3'
             },
             {
-                title: { zh: '歌曲3 - 森林之歌', en: 'Song 3 - Song of the Forest' },
+                title: { zh: 'Alex Wang - 森林之歌', en: 'Alex Wang - Song of the Forest' },
                 artist: { zh: '鸟类保护音乐专辑', en: 'Bird Conservation Album' },
                 duration: '3:58',
-                src: 'songs/歌曲3.mp3'
+                src: '歌曲3.mp3'
             },
             {
-                title: { zh: '歌曲4 - 自然的和谐', en: 'Song 4 - Harmony of Nature' },
+                title: { zh: 'Never Gonna Give You Up - 自然的和谐', en: 'Never Gonna Give You Up' },
                 artist: { zh: '鸟类保护音乐专辑', en: 'Bird Conservation Album' },
                 duration: '4:30',
-                src: 'songs/歌曲4.mp3'
+                src: '歌曲4.mp3'
             }
         ];
-        
-        // 方式二：使用GitHub RAW链接（如果相对路径不工作）
-        // 取消注释下面的代码，并注释上面的songs数组
-        
-        /*
-        const songs = [
-            {
-                title: { zh: '歌曲1 - 鸟类的家园', en: 'Song 1 - Birds\' Home' },
-                artist: { zh: '鸟类保护音乐专辑', en: 'Bird Conservation Album' },
-                duration: '3:45',
-                src: 'https://raw.githubusercontent.com/eric666soo/bird.music/main/songs/歌曲1.mp3'
-            },
-            {
-                title: { zh: '歌曲2 - 自由的翅膀', en: 'Song 2 - Wings of Freedom' },
-                artist: { zh: '鸟类保护音乐专辑', en: 'Bird Conservation Album' },
-                duration: '4:12',
-                src: 'https://raw.githubusercontent.com/eric666soo/bird.music/main/songs/歌曲2.mp3'
-            },
-            {
-                title: { zh: '歌曲3 - 森林之歌', en: 'Song 3 - Song of the Forest' },
-                artist: { zh: '鸟类保护音乐专辑', en: 'Bird Conservation Album' },
-                duration: '3:58',
-                src: 'https://raw.githubusercontent.com/eric666soo/bird.music/main/songs/歌曲3.mp3'
-            },
-            {
-                title: { zh: '歌曲4 - 自然的和谐', en: 'Song 4 - Harmony of Nature' },
-                artist: { zh: '鸟类保护音乐专辑', en: 'Bird Conservation Album' },
-                duration: '4:30',
-                src: 'https://raw.githubusercontent.com/eric666soo/bird.music/main/songs/歌曲4.mp3'
-            }
-        ];
-        */
         
         // 语言数据
         const langData = {
@@ -962,44 +929,11 @@
             
             // 初始语言设置
             switchLanguage('zh');
-            
-            // 测试音频文件是否可访问
-            testAudioFiles();
-        }
-        
-        // 测试音频文件是否可访问
-        function testAudioFiles() {
-            console.log("测试音频文件可访问性...");
-            songs.forEach((song, index) => {
-                const testAudio = new Audio();
-                testAudio.src = song.src;
-                testAudio.addEventListener('canplay', () => {
-                    console.log(`✅ 歌曲${index + 1}可访问: ${song.src}`);
-                });
-                testAudio.addEventListener('error', (e) => {
-                    console.error(`❌ 歌曲${index + 1}无法访问: ${song.src}`, e);
-                    // 显示错误信息给用户
-                    if (index === currentSongIndex) {
-                        document.getElementById('currentSongTitle').textContent += ' (文件无法访问)';
-                    }
-                });
-                testAudio.load();
-            });
         }
         
         // 加载歌曲
         function loadSong(index) {
             currentSongIndex = index;
-            console.log(`正在加载歌曲: ${songs[index].src}`);
-            
-            // 检查音频源是否有效
-            const testAudio = new Audio();
-            testAudio.src = songs[index].src;
-            testAudio.addEventListener('error', (e) => {
-                console.error(`音频文件无法加载: ${songs[index].src}`, e);
-                alert(`无法加载音频文件: ${songs[index].title[currentLang]}\n请检查文件路径和网络连接。`);
-            });
-            
             audioPlayer.src = songs[index].src;
             
             // 更新UI
@@ -1039,14 +973,9 @@
             }
             
             isPlaying = true;
-            audioPlayer.play().then(() => {
-                vinyl.classList.add('playing');
-                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            }).catch(error => {
-                console.error("播放失败:", error);
-                alert("播放失败，请检查音频文件或点击允许自动播放。");
-                isPlaying = false;
-            });
+            audioPlayer.play();
+            vinyl.classList.add('playing');
+            playBtn.innerHTML = '<i class="fas fa-pause"></i>';
         }
         
         // 暂停歌曲
